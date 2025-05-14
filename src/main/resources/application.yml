@@ -1,0 +1,47 @@
+server:
+  http2:
+    enabled: true
+  port: 8080
+  servlet:
+    context-path: /corm
+
+jwt:
+  tokenHeader: Authorization #JWT存储的请求头
+  secret: my-32-character-ultra-secure-and-very-long-secret #JWT加解密使用的密钥
+  expiration: 604800 #JWT的超期限时间(60*60*24*7)
+  tokenHead: 'Bearer '  #JWT负载中拿到开头
+
+app:
+  jwt:
+    secret: mySecretKeyForJWTGeneration12345mySecretKeyForJWTGeneration12345mySecretKeyForJWTGeneration12345mySecretKeyForJWTGeneration12345
+    expiration-ms: 604800000
+
+spring:
+  jackson:
+    default-property-inclusion: non_null
+  application:
+    name: corm
+  datasource:
+    username: corm_admin
+    password: Zhu735148
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://corm-outer.mysql.rds.aliyuncs.com:3306/corm?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+
+driver:
+  mqtt:
+    username: admin
+    password: 123456
+    waitTime: 1000
+    address_list: 39.171.242.91,127.0.0.1,110.40.192.70
+    server:
+      port : 1884
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      logic-delete-field: delete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
