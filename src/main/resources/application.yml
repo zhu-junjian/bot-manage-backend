@@ -4,7 +4,6 @@ server:
   port: 8080
   servlet:
     context-path: /corm
-
 jwt:
   tokenHeader: Authorization #JWT存储的请求头
   secret: my-32-character-ultra-secure-and-very-long-secret #JWT加解密使用的密钥
@@ -18,14 +17,15 @@ app:
 
 spring:
   jackson:
-    default-property-inclusion: non_null
+    default-property-inclusion: ALWAYS
   application:
     name: corm
   datasource:
+    #url: jdbc:mysql://corm-outer.mysql.rds.aliyuncs.com:3306/corm?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
     username: corm_admin
     password: Zhu735148
     driver-class-name: com.mysql.cj.jdbc.Driver
-    jdbc-url: jdbc:mysql://corm-outer.mysql.rds.aliyuncs.com:3306/corm?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    jdbc-url: jdbc:mysql://corm-inner.mysql.rds.aliyuncs.com:3306/corm?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
 
 driver:
   mqtt:

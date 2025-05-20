@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.mirrormetech.corm.core.post.infra.Do.PostDO;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -14,5 +15,6 @@ import org.springframework.stereotype.Repository;
 @Mapper
 public interface PostMapper extends BaseMapper<PostDO> {
 
-    Page<PostDO> selectPosts(Page<PostDO> page, Long firstLevelCategory, Long secondLevelCategory);
+    Page<PostDO> selectPosts(Page<PostDO> page, @Param("firstLevelCategory") Long firstLevelCategory,
+                             @Param("secondLevelCategory") Long secondLevelCategory);
 }

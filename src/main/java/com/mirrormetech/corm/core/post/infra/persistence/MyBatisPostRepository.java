@@ -1,13 +1,11 @@
 package com.mirrormetech.corm.core.post.infra.persistence;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.mirrormetech.corm.core.post.domain.dto.PostDTO;
 import com.mirrormetech.corm.core.post.domain.dto.QueryListDTO;
 import com.mirrormetech.corm.core.post.domain.repository.PostRepository;
 import com.mirrormetech.corm.core.post.infra.Do.PostDO;
 import lombok.RequiredArgsConstructor;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.jdbc.core.metadata.PostgresCallMetaDataProvider;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -29,6 +27,7 @@ public class MyBatisPostRepository  implements PostRepository {
 
     @Override
     public Page<PostDO> getAllPostsByCondition(QueryListDTO queryListDTO, Integer pageNum, Integer size) {
+
         return postMapper.selectPosts(new Page<>(pageNum, size), queryListDTO.getFlcId(), queryListDTO.getSlcId());
     }
 

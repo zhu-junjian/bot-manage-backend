@@ -48,6 +48,13 @@ public class GlobalExceptionHandler {
                 new RegisterResponse(ExceptionCode.VALIDATE_ERROR.getExceptionCode(),msg));
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public ApiResult handleException(RuntimeException exception){
+        log.error(exception.getMessage());
+        return ApiResult.fail(ResultCode.INTERNAL_ERROR,
+                new RegisterResponse("500",exception.getMessage()));
+    }
+
     /*@ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(RuntimeException.class)
     public ApiResult handleRuntimeException(ServiceException exception){

@@ -80,6 +80,8 @@ public class PostDomainService {
             return post;
         }).toList();
         pagePostList.setRecords(postList);
+        pagePostList.setTotal(postDoList.getTotal());
+        pagePostList.setPages(postDoList.getPages());
         return pagePostList;
     }
 
@@ -201,19 +203,26 @@ public class PostDomainService {
      * @param slcId 二级大类Id
      */
     public void findCategory(Post post, Long flcId, Long slcId){
-        FirstLevelCategoryDO firstLevelCategoryDO = flcRepository.selectById(flcId);
-        SecondLevelCategoryDO secondLevelCategoryDO = slcRepository.selectById(slcId);
+        FirstLevelCategoryDO firstLevelCategoryDO;
+        SecondLevelCategoryDO secondLevelCategoryDO;
+        if(flcId == null){
+            return;
+        }
+        firstLevelCategoryDO = flcRepository.selectById(flcId);
+        if (slcId == null) {
+            secondLevelCategoryDO = new SecondLevelCategoryDO();
+        }else {
+            secondLevelCategoryDO = slcRepository.selectById(slcId);
+        }
         post.setFirstLevelCategoryInfo(firstLevelCategoryFactory.create(firstLevelCategoryDO));
         post.setSecondLevelCategoryInfo(secondLevelCategoryFactory.create(secondLevelCategoryDO));
     }
 
     /**
      * @param postList 内容列表
-     * @param flcId 一级大类Id
-     * @param slcId 二级大类Id
      */
-    public void findCategoryForList(List<Post> postList, Long flcId, Long slcId){
-        postList.forEach(post -> {findCategory(post, flcId, slcId);});
+    public void findCategoryForList(List<Post> postList){
+        postList.forEach(post -> {findCategory(post, post.getFirstLevelCategory(), post.getSecondLevelCategory());});
     }
 
 }

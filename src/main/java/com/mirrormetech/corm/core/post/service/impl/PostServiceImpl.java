@@ -48,8 +48,8 @@ public class PostServiceImpl implements PostService {
         postDomainService.userLikedForList(currentUserId, postList);
         //补充话题信息
         postDomainService.findTopicForList(postList);
-        //查询大类信息
-        postDomainService.findCategoryForList(postList, queryListDTO.getFlcId(), queryListDTO.getSlcId());
+        //补充大类信息 遍历所有post集合，查询每条记录对应的大类信息
+        postDomainService.findCategoryForList(postList);
         //TODO 补充点赞数
         postDomainService.getPostLikeList(postList);
         pagePostList.setRecords(postList);

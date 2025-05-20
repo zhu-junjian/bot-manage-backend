@@ -93,7 +93,7 @@ public class PostDO {
     @TableField("second_level_category")
     private Long secondLevelCategory;
 
-    // 是否精选
+    // 是否精选 0-否 1-是
     @TableField("is_featured")
     private Integer isFeatured;
 
