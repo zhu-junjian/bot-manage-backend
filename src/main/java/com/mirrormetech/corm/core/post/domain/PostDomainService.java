@@ -80,6 +80,8 @@ public class PostDomainService {
             return post;
         }).toList();
         pagePostList.setRecords(postList);
+        pagePostList.setCurrent(postDoList.getCurrent());
+        pagePostList.setSize(postDoList.getSize());
         pagePostList.setTotal(postDoList.getTotal());
         pagePostList.setPages(postDoList.getPages());
         return pagePostList;
