@@ -1,6 +1,5 @@
 package com.mirrormetech.corm.core.post.domain.dto;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
 /**
@@ -9,10 +8,18 @@ import lombok.Data;
  * @date 2025/05/07
  */
 @Data
-@AllArgsConstructor
 public class QueryListDTO {
 
     private Long slcId;
 
     private Long flcId;
+
+    private Integer isFeatured;
+
+    private Integer status;
+
+    public QueryListDTO(Long slcId, Long flcId) {
+        this.slcId = slcId;
+        this.flcId = flcId;
+    }
 }

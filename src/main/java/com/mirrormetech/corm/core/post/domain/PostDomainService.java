@@ -72,6 +72,9 @@ public class PostDomainService {
      * @return 列表集合
      */
     public Page<Post> getAllPostsByCondition(QueryListDTO queryListDTO, Integer pageNum, Integer size) {
+        //添加过滤条件 1. 必须为精选  2.状态为正常状态
+        queryListDTO.setIsFeatured(1);
+        queryListDTO.setStatus(0);
         Page<PostDO> postDoList = myBatisPostRepository.getAllPostsByCondition(queryListDTO, pageNum, size);
         Page<Post> pagePostList = new Page<>();
         List<Post> postList = postDoList.getRecords().stream().map(postDO -> {
@@ -216,8 +219,17 @@ public class PostDomainService {
         }else {
             secondLevelCategoryDO = slcRepository.selectById(slcId);
         }
-        post.setFirstLevelCategoryInfo(firstLevelCategoryFactory.create(firstLevelCategoryDO));
-        post.setSecondLevelCategoryInfo(secondLevelCategoryFactory.create(secondLevelCategoryDO));
+        //TODO 修改当ficId不为空，但是数据库没有相应id对应的内容时产生的bug
+        if (firstLevelCategoryDO == null) {
+            post.setFirstLevelCategoryInfo(null);
+        }else {
+            post.setFirstLevelCategoryInfo(firstLevelCategoryFactory.create(firstLevelCategoryDO));
+        }
+        if (secondLevelCategoryDO == null) {
+            post.setSecondLevelCategoryInfo(null);
+        }else {
+            post.setSecondLevelCategoryInfo(secondLevelCategoryFactory.create(secondLevelCategoryDO));
+        }
     }
 
     /**

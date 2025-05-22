@@ -28,7 +28,7 @@ public class MyBatisPostRepository  implements PostRepository {
     @Override
     public Page<PostDO> getAllPostsByCondition(QueryListDTO queryListDTO, Integer pageNum, Integer size) {
 
-        return postMapper.selectPosts(new Page<>(pageNum, size), queryListDTO.getFlcId(), queryListDTO.getSlcId());
+        return postMapper.selectPosts(new Page<>(pageNum, size), queryListDTO);
     }
 
 }

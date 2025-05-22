@@ -9,12 +9,17 @@
             post_record p
                 LEFT JOIN user_post_like pl ON p.id = pl.post_id
         <where>
-            p.is_featured = 1
-            <if test='firstLevelCategory != null'>
-                AND p.first_level_category = #{firstLevelCategory}
+            <if test='req.isFeatured != null'>
+                AND p.is_featured = #{req.isFeatured}
             </if>
-            <if test='secondLevelCategory != null'>
-                AND p.second_level_category = #{secondLevelCategory}
+            <if test='req.status != null'>
+                AND p.status = #{req.status}
+            </if>
+            <if test='req.flcId != null'>
+                AND p.first_level_category = #{req.flcId}
+            </if>
+            <if test='req.slcId != null'>
+                AND p.second_level_category = #{req.slcId}
             </if>
         </where>
         GROUP BY
