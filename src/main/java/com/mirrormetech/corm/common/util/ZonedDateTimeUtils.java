@@ -1,6 +1,7 @@
 package com.mirrormetech.corm.common.util;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -22,10 +23,10 @@ public final class ZonedDateTimeUtils {
      *
      * @return 当前东八区时间的 Timestamp 对象（UTC 时间戳）
      */
-    public static Timestamp getCurrentTimeInCST() {
+    public static LocalDateTime getCurrentLocalDateTimeInCST() {
         ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Asia/Shanghai"))
                 .withNano(0); // 清除纳秒，保留到秒
-        return Timestamp.from(zdt.toInstant());      // 转换为 UTC 时间戳
+        return Timestamp.from(zdt.toInstant()).toLocalDateTime();      // 转换为 UTC 时间戳
     }
 
     /**

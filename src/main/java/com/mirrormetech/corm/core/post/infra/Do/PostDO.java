@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * 数据库持久化对象
@@ -25,7 +25,7 @@ public class PostDO {
 
     @TableField("publish_time")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
-    private Timestamp publishTime;
+    private LocalDateTime publishTime;
 
     @TableField("location_text")
     private String locationText;

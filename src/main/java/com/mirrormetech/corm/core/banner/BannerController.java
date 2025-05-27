@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2025/05/06
  */
 @RestController
-@RequestMapping("/api/banner")
+@RequestMapping("/api/v1/banner")
 @RequiredArgsConstructor
 public class BannerController {
 

@@ -1,5 +1,6 @@
 package com.mirrormetech.corm.core.post.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.mirrormetech.corm.common.util.ZonedDateTimeUtils;
 import com.mirrormetech.corm.core.category.domain.FirstLevelCategory;
 import com.mirrormetech.corm.core.category.domain.SecondLevelCategory;
@@ -8,7 +9,7 @@ import com.mirrormetech.corm.core.topic.domain.Topic;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -24,7 +25,8 @@ public class Post {
 
     private Long id;
 
-    private Timestamp publishTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
+    private LocalDateTime publishTime;
 
     private String locationText;
 
@@ -104,7 +106,7 @@ public class Post {
      */
     public void createPost(PostDTO postDTO) {
         this.setLocationText(postDTO.getLocationText());
-        this.publishTime = ZonedDateTimeUtils.getCurrentTimeInCST();
+        this.publishTime = ZonedDateTimeUtils.getCurrentLocalDateTimeInCST();
         this.location = postDTO.getLocation();
         this.userId = postDTO.getUserId();
         this.content = postDTO.getContent();

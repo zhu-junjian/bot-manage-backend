@@ -16,7 +16,7 @@ public class TopicFactory {
     public TopicDO create(TopicDTO topicDTO) {
         TopicDO topicDO = new TopicDO();
         topicDO.setName(topicDTO.getTopicName());
-        topicDO.setCreate_time(ZonedDateTimeUtils.getCurrentTimeInCST());
+        topicDO.setCreateTime(ZonedDateTimeUtils.getCurrentLocalDateTimeInCST());
         topicDO.setStatus(0);
         return topicDO;
     }

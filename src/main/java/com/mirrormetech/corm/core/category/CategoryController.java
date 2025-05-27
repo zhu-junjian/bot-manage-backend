@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2025/05/06
  */
 @RestController
-@RequestMapping("/api/posts/category")
+@RequestMapping("/api/v1/posts/category")
 @RequiredArgsConstructor
 public class CategoryController {
 

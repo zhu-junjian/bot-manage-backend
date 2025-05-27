@@ -6,6 +6,7 @@ import lombok.Data;
 import java.math.BigDecimal;
 import java.sql.Date;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * @author spencer
@@ -32,11 +33,11 @@ public class DeviceVO {
 
     private Date warrantyExpiry;
 
-    private Timestamp lastHeartbeat;
+    private LocalDateTime lastHeartbeat;
 
     private DeviceStatus currentStatus; // 状态枚举
 
-    private Timestamp lastOperationTime;
+    private LocalDateTime lastOperationTime;
 
     private String sensorInfo;
 

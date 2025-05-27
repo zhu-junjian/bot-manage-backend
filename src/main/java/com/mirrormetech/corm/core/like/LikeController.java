@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2025/05/06
  */
 @RestController
-@RequestMapping("/api/posts/like")
+@RequestMapping("/api/v1/posts/like")
 @RequiredArgsConstructor
 public class LikeController {
 

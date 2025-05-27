@@ -34,8 +34,8 @@ public class MyBatisFirstLevelCategoryRepository implements FirstLevelCategoryRe
     }
 
     @Override
-    public List<FirstLevelCategoryDO> selectAll(){
-        return firstLevelCategoryMapper.selectAll();
+    public List<FirstLevelCategoryDO> selectAllActive(){
+        return firstLevelCategoryMapper.selectAllActive();
     }
 
 }

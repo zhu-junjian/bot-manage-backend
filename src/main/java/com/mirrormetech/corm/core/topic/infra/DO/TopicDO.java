@@ -10,6 +10,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * 内容 话题
@@ -28,7 +29,7 @@ public class TopicDO {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     @TableField("create_time")
-    private Timestamp create_time;
+    private LocalDateTime createTime;
 
     /**
      * 状态 0-正常 1-关闭

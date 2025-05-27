@@ -25,7 +25,7 @@ spring:
     username: corm_admin
     password: Zhu735148
     driver-class-name: com.mysql.cj.jdbc.Driver
-    jdbc-url: jdbc:mysql://corm-inner.mysql.rds.aliyuncs.com:3306/corm?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
+    jdbc-url: jdbc:mysql://corm-outer.mysql.rds.aliyuncs.com:3306/corm?characterEncoding=UTF-8&useSSL=false&serverTimezone=UTC
 
 driver:
   mqtt:
@@ -40,8 +40,16 @@ mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
   global-config:
     db-config:
       logic-delete-field: delete
       logic-delete-value: 1
       logic-not-delete-value: 0
+logging:
+  level:
+    com.mirrormetech.corm.core.post.infra.persistence.PostMapper: DEBUG  # 替换成你的Mapper接口所在包名
+    org.apache.ibatis: TRACE
+    java.sql: DEBUG
+    java.sql.Statement: DEBUG
+    java.sql.PreparedStatement: DEBUG

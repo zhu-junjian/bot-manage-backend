@@ -16,7 +16,7 @@ import java.util.List;
  * @date 2025/05/08
  */
 @RestController
-@RequestMapping("/api/device")
+@RequestMapping("/api/v1/device")
 @RequiredArgsConstructor
 public class DeviceController {
 

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * @author spencer
@@ -40,7 +41,7 @@ public class BannerDO {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     @TableField("create_time")
-    private Timestamp createTime;
+    private LocalDateTime createTime;
 
     @TableField("banner_type")
     private Integer bannerType;

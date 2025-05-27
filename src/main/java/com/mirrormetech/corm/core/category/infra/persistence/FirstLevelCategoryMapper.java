@@ -11,6 +11,6 @@ import java.util.List;
 @Mapper
 public interface FirstLevelCategoryMapper extends BaseMapper<FirstLevelCategoryDO> {
 
-    List<FirstLevelCategoryDO> selectAll();
+    List<FirstLevelCategoryDO> selectAllActive();
 
 }

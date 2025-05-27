@@ -58,7 +58,7 @@ public class CategoryDomainService {
      * @return 所有一类 二类元素列表集合
      */
     public List<FirstLevelCategoryVO> findAll() {
-        List<FirstLevelCategoryDO> firstLevelCategories = myBatisFirstLevelCategoryRepository.selectAll();
+        List<FirstLevelCategoryDO> firstLevelCategories = myBatisFirstLevelCategoryRepository.selectAllActive();
         List<FirstLevelCategoryVO> voListByDO = firstLevelCategoryFactory.createVOListByDO(firstLevelCategories);
         voListByDO.forEach(firstLevelCategoryVO -> {
             List<SecondLevelCategoryDO> mySecondLevelCategories = new ArrayList<>(myBatisSecondLevelCategoryRepository.findByParentId(firstLevelCategoryVO.getId()));
@@ -69,7 +69,7 @@ public class CategoryDomainService {
 
     public void saveFirstLevelCategory(CategoryDTO categoryDTO) {
         // 1. 如果是一级大类 需要先从数据库查询出所有一级大类别表,并完成重复名称校验
-        List<FirstLevelCategoryDO> firstLevelCategories = myBatisFirstLevelCategoryRepository.selectAll();
+        List<FirstLevelCategoryDO> firstLevelCategories = myBatisFirstLevelCategoryRepository.selectAllActive();
         if (firstLevelCategories != null) {
             boolean nameExist = firstLevelCategories.stream().
                     anyMatch(firstLevelCategory -> firstLevelCategory.getName().equals(categoryDTO.getCategoryName()));

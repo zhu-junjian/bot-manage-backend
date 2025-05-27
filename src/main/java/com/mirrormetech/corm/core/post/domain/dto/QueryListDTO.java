@@ -18,8 +18,4 @@ public class QueryListDTO {
 
     private Integer status;
 
-    public QueryListDTO(Long slcId, Long flcId) {
-        this.slcId = slcId;
-        this.flcId = flcId;
-    }
 }

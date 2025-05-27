@@ -19,5 +19,5 @@ public interface FirstLevelCategoryRepository {
 
     void save(CategoryDTO categoryDTO);
 
-    List<FirstLevelCategoryDO> selectAll();
+    List<FirstLevelCategoryDO> selectAllActive();
 }

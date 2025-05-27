@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
  * @author spencer
  * @date 2025/04/28
  */
-@RequestMapping("/api/posts")
+@RequestMapping("/api/v1/posts")
 @RestController
 @RequiredArgsConstructor
 public class PostController {
@@ -43,7 +43,9 @@ public class PostController {
                                              @RequestParam(value = "secondLevelCategory",required = false) Long secondLevelCategory,
                                              @RequestParam(value = "page") Integer page,
                                              @RequestParam(value = "size") Integer size) {
-        QueryListDTO queryListDTO = new QueryListDTO(firstLevelCategory, secondLevelCategory);
+        QueryListDTO queryListDTO = new QueryListDTO();
+        queryListDTO.setFlcId(firstLevelCategory);
+        queryListDTO.setSlcId(secondLevelCategory);
         return ApiResult.success(postService.getAllPosts(queryListDTO, page, size));
     }
 }

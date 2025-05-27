@@ -15,7 +15,7 @@ import java.util.List;
  * @date 2025/05/08
  */
 @RestController
-@RequestMapping("/api/posts/topic")
+@RequestMapping("/api/v1/posts/topic")
 @RequiredArgsConstructor
 public class TopicController {
 
@@ -29,7 +29,7 @@ public class TopicController {
     }
 
     @GetMapping()
-    public ApiResult<List<TopicVO>> updateTopic() {
+    public ApiResult<List<TopicVO>> getActiveTopics() {
         List<TopicVO> topics = topicService.getAllNormalTopics();
         return ApiResult.success(topics);
     }
