@@ -32,7 +32,7 @@ public class MonitorMsgTime implements Runnable {
         //注意，整个执行过程中，代码报错，线程就会终止
         InetSocketAddress address = (InetSocketAddress) ctx.channel().remoteAddress();
         if (ctx != null && ctx.channel().isActive()) {
-            log.info("重复发送消息给客户端：" + address.getHostString());
+            log.info("没有收到ACK，重复发送消息给客户端：" + address.getHostString());
             if (mqttMessage instanceof MqttPublishMessage) {
                 //推送的原始消息,每次推送，都需要重新拷贝一份
                 try {

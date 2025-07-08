@@ -4,5 +4,5 @@ import com.mirrormetech.corm.core.like.domain.dto.PostLikeDTO;
 
 public interface PostLikeService {
 
-    void likeOrUnlike(PostLikeDTO postLikeDTO);
+    String likeOrUnlike(PostLikeDTO postLikeDTO);
 }

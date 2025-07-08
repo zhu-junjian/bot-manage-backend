@@ -9,6 +9,19 @@ import lombok.Getter;
 @Getter
 public enum ExceptionCode {
 
+    /*
+       全局异常
+     */
+    // 参数为空 或者 参数异常
+    INVALID_PARAM("100001", "无效的参数！"),
+
+    //用户个人资料修改
+    NO_AUTH_TO_UPDATE("UU100001", "没有修改权限！"),
+
+    //用户关注相关
+    CANNOT_FOLLOW_YOURSELF("UF100001","不能关注自己！"),
+    ALREADY_FOLLOWING("UF100002","请勿重复关注！"),
+
     //登录 授权相关
     INSIDE_ERROR("494", "内部错误"),
     QUERY_ERROR_USER_NOT_EXIST("495", "查询失败，用户不存在"),
@@ -33,8 +46,9 @@ public enum ExceptionCode {
     //点赞
     MISSING_ARGS("L100001","参数有误,用户信息或者内容信息不存在"),
     USER_OR_POST_NOT_EXISTS("L100002","用户或者内容不存在"),
-    ALREADY_LIKED("L100003","用户已点赞"),
+    ALREADY_LIKED("L100003","请勿重复点赞"),
     ALREADY_UNLIKED("L100004", "用户已取消点赞，请勿重复取消"),
+    UNLIKE_ERROR("L100005","取消点赞失败，没有点赞信息"),
 
     //话题相关
     MISSING_TOPIC_NAME("T100001","参数有误,缺少话题名称"),

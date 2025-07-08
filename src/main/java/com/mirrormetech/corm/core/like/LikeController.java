@@ -31,7 +31,7 @@ public class LikeController {
      */
     @PostMapping
     public ApiResult like(@RequestBody PostLikeDTO postLikeDTO) {
-        postLikeService.likeOrUnlike(postLikeDTO);
-        return ApiResult.success();
+        String message = postLikeService.likeOrUnlike(postLikeDTO);
+        return ApiResult.success(null,"success",message);
     }
 }

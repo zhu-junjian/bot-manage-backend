@@ -91,6 +91,14 @@ public class MqttMsgBack {
      */
     public static final ConcurrentHashMap<String, ByteBuf> cacheRepeatMessages = new ConcurrentHashMap<String, ByteBuf>();
 
+    public ConcurrentHashMap<String, HashSet<String>> getSubMap(){
+        return subMap;
+    }
+
+    public ConcurrentHashMap<String, Set<String>> getClientTopicMap(){
+        return clientTopicMap;
+    }
+
    /* public MqttMsgBack(RobotDeviceService robotDeviceService) {
         this.robotDeviceService = robotDeviceService;
     }*/
@@ -175,8 +183,9 @@ public class MqttMsgBack {
      * TODO 后续是否涉及缓存
      */
     public void disConnect(ChannelHandlerContext ctx, MqttMessage mqttMessage){
-        MqttConnectMessage mqttConnectMessage = (MqttConnectMessage) mqttMessage;
-        String clientIdentifier = mqttConnectMessage.payload().clientIdentifier();
+        //TODO 断开连接会显示类型转换失败 此处进行注释 直接关闭连接
+        /*MqttConnectMessage mqttConnectMessage = (MqttConnectMessage) mqttMessage;
+        String clientIdentifier = mqttConnectMessage.payload().clientIdentifier();*/
         /*robotDeviceService.transitionStatus(new DeviceRecord(clientIdentifier,DeviceStatus.OFFLINE));*/
         ctx.close();
     }
@@ -224,7 +233,7 @@ public class MqttMsgBack {
                             byteBuf.retainedDuplicate();
                             //防止内存溢出，最后在消息被ack或者客户端断开掉线的时候，拿到并进行释放
                             cacheRepeatMessages.put(channelId, byteBuf);
-                            cachePublishMsg(qos, byteBuf, variableHeader, mqttFixedHeaderInfo, context);
+                            //cachePublishMsg(qos, byteBuf, variableHeader, mqttFixedHeaderInfo, context);
                         }
                     }
                 } else {
@@ -395,7 +404,7 @@ public class MqttMsgBack {
                             //引用计数器增加
                             payload.retainedDuplicate();
                             cacheRepeatMessages.put(id, payload);
-                            cachePublishMsg(qos, payload, variableHeader, mqttFixedHeaderInfo, ctx);
+                            //(qos, payload, variableHeader, mqttFixedHeaderInfo, ctx);
                         }
                     }
                 }

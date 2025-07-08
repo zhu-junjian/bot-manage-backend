@@ -23,34 +23,35 @@ import org.springframework.util.StringUtils;
 
 import javax.sql.DataSource;
 
-@Slf4j
+/*@Slf4j
 @EnableConfigurationProperties(MybatisPlusProperties.class)
 @EnableTransactionManagement
 @EnableAspectJAutoProxy
 @Configuration
-@MapperScan(basePackages = "com.mirrormetech.corm", sqlSessionFactoryRef = "masterSqlSessionFactory")
+@MapperScan(basePackages = "com.mirrormetech.corm", sqlSessionFactoryRef = "masterSqlSessionFactory")*/
+@Configuration
 public class HikariCpConfig {
 
-    @Bean
+   @Bean
     public MybatisPlusInterceptor mybatisPlusInterceptor() {
         MybatisPlusInterceptor interceptor = new MybatisPlusInterceptor();
         interceptor.addInnerInterceptor(new PaginationInnerInterceptor(DbType.MYSQL));
         return interceptor;
     }
 
-
+ /*
     @Bean(name = "masterDataSource")
     @ConfigurationProperties(prefix = "spring.datasource")
     public DataSource masterDataSource() {
         return new HikariDataSource();
-    }
+    }*/
 
     /**
      * @param datasource 数据源
      * @return SqlSessionFactory
      * @Primary 默认SqlSessionFactory
      */
-    @Bean(name = "masterSqlSessionFactory")
+    /*@Bean(name = "masterSqlSessionFactory")
     public SqlSessionFactory masterSqlSessionFactory(@Qualifier("masterDataSource") DataSource datasource,
                                                      Interceptor interceptor,
                                                      MybatisPlusProperties properties) throws Exception {
@@ -69,11 +70,11 @@ public class HikariCpConfig {
         bean.setGlobalConfig(globalConfig);
         log.info("------------------------------------------masterDataSource 配置成功");
         return bean.getObject();
-    }
+    }*/
 
-    @Bean("masterSessionTemplate")
+    /*@Bean("masterSessionTemplate")
     public SqlSessionTemplate masterSessionTemplate(@Qualifier("masterSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
-    }
+    }*/
 
 }

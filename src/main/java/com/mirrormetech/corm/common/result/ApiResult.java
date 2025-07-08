@@ -42,6 +42,14 @@ public class ApiResult<T> implements Serializable {
         return apiResult;
     }
 
+    public static <T> ApiResult<T> success(T data, String status, String message) {
+        ApiResult<T> apiResult = new ApiResult<>();
+        apiResult.setStatus(status);
+        apiResult.setMessage(message);
+        apiResult.setData(data);
+        return apiResult;
+    }
+
     /**
      * 失败响应
      * @param resultCode 状态码枚举

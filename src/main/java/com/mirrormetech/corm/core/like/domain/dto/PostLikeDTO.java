@@ -13,9 +13,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class PostLikeDTO {
 
+    private Long id;
+
     private Long userId;
 
     private Long postId;
 
-    private int status;
+    private Integer status;
 }

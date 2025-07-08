@@ -26,17 +26,22 @@ public class GlobalExceptionHandler {
                 new RegisterResponse(UserErrorMessage.USER_NAME_EXISTS.getCode(),UserErrorMessage.USER_NAME_EXISTS.getMessage()));
     }
 
+    /**
+     * 所有从服务内部抛出的异常 HTTP状态码修改为200
+     * @param exception 错误码详情
+     * @return ApiResult
+     */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(ServiceException.class)
     public ApiResult handleServiceException(ServiceException exception){
         log.error(exception.getMessage());
-        return ApiResult.fail(ResultCode.BAD_REQUEST,
+        return ApiResult.fail(ResultCode.SUCCESS,
                 new RegisterResponse(exception.getCode(),exception.getMessage()));
     }
 
     /**
      * 参数校验异常处理器
-     * @param exception 参数一擦汗给你
+     * @param exception 参数异常
      * @return ApiResult
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -50,6 +55,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(RuntimeException.class)
     public ApiResult handleException(RuntimeException exception){
+        exception.printStackTrace();
         log.error(exception.getMessage());
         return ApiResult.fail(ResultCode.INTERNAL_ERROR,
                 new RegisterResponse("500",exception.getMessage()));

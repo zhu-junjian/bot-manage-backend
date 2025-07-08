@@ -6,6 +6,8 @@ import com.mirrormetech.corm.core.post.domain.Post;
 import com.mirrormetech.corm.core.post.domain.PostDomainService;
 import com.mirrormetech.corm.core.post.domain.dto.PostDTO;
 import com.mirrormetech.corm.core.post.domain.dto.QueryListDTO;
+import com.mirrormetech.corm.core.post.domain.dto.WorksQueryDTO;
+import com.mirrormetech.corm.core.post.infra.Do.PostDO;
 import com.mirrormetech.corm.core.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,6 +27,25 @@ public class PostServiceImpl implements PostService {
     private final PostDomainService postDomainService;
 
     /**
+     * 查询目标用户
+     * @param worksQueryDTO
+     * @return
+     */
+    public Page<PostDO> getUserLikedWorks(WorksQueryDTO worksQueryDTO){
+        return postDomainService.getUserLikeWorksByUserId(worksQueryDTO);
+    }
+
+    /**
+     * 从源用户查看目标用户的作品列表 包含点赞关系 - 分页
+     *
+     * @param worksQueryDTO 源用户ID 目标用户ID 分页参数
+     * @return 其作品集合-分页
+     */
+    public Page<PostDO> getUserWorks(WorksQueryDTO worksQueryDTO) {
+        return postDomainService.getUserWorksByUserId(worksQueryDTO);
+    }
+
+    /**
      * @param postDTO
      * @return saved target
      */
@@ -35,14 +56,15 @@ public class PostServiceImpl implements PostService {
 
     /**
      * 通过领域服务关联
-     * 按照官方排序 热度
+     * 排序优先级： 官方排序 热度 发布时间倒序
      * @return 分页列表
      */
     @Override
-    public Page<Post> getAllPosts(QueryListDTO queryListDTO, Integer pageNum, Integer size) {
+    public Page<Post> getAllPosts(QueryListDTO queryListDTO, Page page) {
         Long currentUserId = securityContextUtil.getCurrentUserId();
         //获取符合当前条件的所有
-        Page<Post> pagePostList = postDomainService.getAllPostsByCondition(queryListDTO, pageNum, size);
+        //<Post> pagePostList = postDomainService.getAllPostsByCondition(queryListDTO, pageNum, size);
+        Page<Post> pagePostList = postDomainService.getAllPosts(queryListDTO, page);
         List<Post> postList = pagePostList.getRecords();
         //用户内容点赞信息
         postDomainService.userLikedForList(currentUserId, postList);

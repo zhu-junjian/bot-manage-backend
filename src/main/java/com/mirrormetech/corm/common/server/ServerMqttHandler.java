@@ -90,19 +90,23 @@ public class ServerMqttHandler extends SimpleChannelInboundHandler<MqttMessage> 
             switch (mqttFixedHeader.messageType()) {
                 // ----------------------接收消息端（服务端）可能会触发的事件----------------------------------------------------------------
                 case CONNECT:
+                    log.info("CONNECT");
                     //	在一个网络连接上，客户端只能发送一次CONNECT报文。服务端必须将客户端发送的第二个CONNECT报文当作协议违规处理并断开客户端的连接
                     //	建议connect消息单独处理，用来对客户端进行认证管理等 这里直接返回一个CONNACK消息
                     mqttMsgBack.connectionAck(ctx, mqttMessage);
                     break;
                 case PUBLISH:
+                    log.info("PUBLISH");
                     //	收到消息，返回确认，PUBACK报文是对QoS 1等级的PUBLISH报文的响应,PUBREC报文是对PUBLISH报文的响应
                     mqttMsgBack.publishAck(ctx, mqttMessage);
                     break;
                 case PUBREL:
+                    log.info("PUBREL");
                     //	释放消息，PUBREL报文是对QoS 2等级的PUBREC报文的响应,此时我们应该回应一个PUBCOMP报文
                     mqttMsgBack.publishComp(ctx, mqttMessage);
                     break;
                 case SUBSCRIBE:
+                    log.info("SUBSCRIBE");
                     //	客户端订阅主题
                     //	客户端向服务端发送SUBSCRIBE报文用于创建一个或多个订阅，每个订阅注册客户端关心的一个或多个主题。
                     //	为了将应用消息转发给与那些订阅匹配的主题，服务端发送PUBLISH报文给客户端。
@@ -110,15 +114,18 @@ public class ServerMqttHandler extends SimpleChannelInboundHandler<MqttMessage> 
                     mqttMsgBack.subscribeAck(ctx, mqttMessage);
                     break;
                 case UNSUBSCRIBE:
+                    log.info("UNSUBSCRIBE");
                     //	客户端取消订阅
                     //	客户端发送UNSUBSCRIBE报文给服务端，用于取消订阅主题
                     mqttMsgBack.unsubscribeAck(ctx, mqttMessage);
                     break;
                 case PINGREQ:
+                    log.info("PINGREQ");
                     //	客户端发起心跳
                     mqttMsgBack.pingResp(ctx, mqttMessage);
                     break;
                 case DISCONNECT:
+                    log.info("DISCONNECT");
                     //	客户端主动断开连接
                     //	DISCONNECT报文是客户端发给服务端的最后一个控制报文， 服务端必须验证所有的保留位都被设置为0
                     /*
@@ -129,16 +136,20 @@ public class ServerMqttHandler extends SimpleChannelInboundHandler<MqttMessage> 
                     break;
                 // ----------------------服务端作为发送消息端可能会接收的事件----------------------------------------------------------------
                 case PUBACK:
+                    log.info("PUBACK");
                 case PUBREC:
+                    log.info("PUBREC");
                     //QoS 2级别,响应一个PUBREL报文消息，PUBACK、PUBREC这俩都是ack消息
                     //PUBACK报文是对QoS 1等级的PUBLISH报文的响应，如果一段时间没有收到客户端ack，服务端会重新发送消息
                     mqttMsgBack.receivePubAck(ctx, mqttMessage);
                     break;
                 case PUBCOMP:
+                    log.info("PUBCOMP");
                     //收到qos2级别接收端最后一次发送过来的确认消息
                     mqttMsgBack.receivePubcomp(ctx, mqttMessage);
                     break;
                 default:
+                    log.info("default");
                     break;
             }
         }

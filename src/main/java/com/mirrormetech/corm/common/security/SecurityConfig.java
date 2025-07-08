@@ -40,7 +40,7 @@ public class SecurityConfig {
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
                         // 指定某些接口不需要通过验证即可访问。像登陆、注册接口肯定是不需要认证的
-                        .requestMatchers("/api/auth/**","/api/auth/**","/mqttBackend/**").permitAll()
+                        .requestMatchers("/api/*/auth/**","/api/*/auth/**","/mqttBackend/**").permitAll()
                         // 这里意思是其它所有接口需要认证才能访问
                         .requestMatchers("/api/**").authenticated()
                         // 后台管理接口只有管理员权限账号可以访问

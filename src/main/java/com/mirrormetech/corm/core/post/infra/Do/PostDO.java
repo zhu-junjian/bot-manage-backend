@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.beans.Transient;
 import java.time.LocalDateTime;
 
 /**
@@ -104,4 +105,25 @@ public class PostDO {
     // 官方排序权重
     @TableField("official_weight")
     private Integer officialWeight;
+
+    /**
+     * 查看用户作品
+     * 源用户ID
+     */
+    @TableField(exist = false)
+    private Long sourceUserId;
+
+    /**
+     * 查看用户作品
+     * 目标用户ID
+     */
+    @TableField(exist = false)
+    private Long targetUserId;
+
+    /**
+     * 查看用户作品
+     * 当前用户是否已点赞
+     */
+    @TableField(exist = false)
+    private Boolean isLiked;
 }

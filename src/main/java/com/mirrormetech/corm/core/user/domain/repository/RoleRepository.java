@@ -1,4 +1,4 @@
-package com.mirrormetech.corm.core.user.domain;
+package com.mirrormetech.corm.core.user.domain.repository;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.mirrormetech.corm.core.user.infra.Role;

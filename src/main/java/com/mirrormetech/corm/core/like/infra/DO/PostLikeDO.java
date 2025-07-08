@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 /**
  * 发布内容 点赞关联表
@@ -32,7 +33,7 @@ public class PostLikeDO {
     //点赞时间 取消点赞时间
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Shanghai")
     @TableField("like_time")
-    private Timestamp likeTime;
+    private LocalDateTime likeTime;
 
     //点赞状态 1-有效点赞 0-取消点赞
     @TableField("status")

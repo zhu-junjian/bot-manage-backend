@@ -10,6 +10,7 @@ import org.apache.commons.codec.binary.Hex;
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
 import java.security.SecureRandom;
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -18,6 +19,7 @@ import java.util.List;
 @Data
 @TableName("tb_user")
 public class User {
+
     @TableId(type = IdType.AUTO)
     private Long id;
 
@@ -42,6 +44,29 @@ public class User {
     @TableField("avatar_url")
     private String avatarUrl;
 
+    @TableField("phone_num")
+    private String phoneNum;
+
+    private Integer status;
+
+    @TableField("user_type")
+    private Integer userType;
+
+    @TableField("uid")
+    private String uid;
+
+    @TableField("bio")
+    private String bio;
+
+    @TableField("background_url")
+    private String backgroundUrl;
+
+    @TableField("collaboration_url")
+    private String collaborationUrl;
+
+    @TableField("birthday")
+    private LocalDate birthday;
+
     @TableField(exist = false)
     private String role;
 
@@ -50,6 +75,15 @@ public class User {
 
     @TableField(exist = false)
     private List<Integer> codes;
+
+    /**
+     * userId是否为当前用户id
+     * @param userId 前端传入的userId参数
+     * @return userId == user. Id
+     */
+    public boolean isCurrent(Long userId){
+        return this.id.equals(userId);
+    }
 
     public User(Long id, String username, String passwordHash, String salt) {
         this.id = id;

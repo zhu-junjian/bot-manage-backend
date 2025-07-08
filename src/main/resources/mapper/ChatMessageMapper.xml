@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mirrormetech.corm.core.message.infra.persistence.ChatMessageMapper">
+    
+    <update id="updateRead" >
+        UPDATE chat_message cm SET cm.is_read = 1 WHERE cm.chat_session_id = #{chatSessionId} AND cm.id in
+        <foreach collection="msgIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+    <update id="updateLikeMsgReadByIds">
+        UPDATE chat_message cm SET cm.is_read = 1 WHERE cm.chat_session_id = 0 AND receiver_id = #{receiverId} AND msg_type = 5 AND id in
+        <foreach collection="msgIds" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </update>
+
+</mapper>

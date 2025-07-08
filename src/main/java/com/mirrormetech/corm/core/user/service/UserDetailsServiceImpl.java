@@ -1,11 +1,12 @@
 package com.mirrormetech.corm.core.user.service;
 
 import com.mirrormetech.corm.common.security.UserDetailsImpl;
-import com.mirrormetech.corm.core.user.domain.RoleRepository;
-import com.mirrormetech.corm.core.user.domain.UserRepository;
+import com.mirrormetech.corm.core.user.domain.repository.RoleRepository;
+import com.mirrormetech.corm.core.user.domain.repository.UserRepository;
 import com.mirrormetech.corm.core.user.infra.Role;
 import com.mirrormetech.corm.core.user.infra.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
+    @Qualifier("myBatisUserRepoImpl")
     @Autowired
     private UserRepository userRepository;
 
@@ -45,7 +47,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 user.getAvatarUrl(),
                 user.getPassword(),
                 user.getEmail(),
-                authorities
+                authorities,
+                user
         );
     }
 }

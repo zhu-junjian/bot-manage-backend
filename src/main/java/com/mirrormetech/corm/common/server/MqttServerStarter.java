@@ -16,7 +16,7 @@ public class MqttServerStarter implements ApplicationListener<ApplicationReadyEv
     @Override
     public void onApplicationEvent(ApplicationReadyEvent event) {
         log.info("Application started,commencing mqtt server...");
-        mqttBootServer.start();
+        //mqttBootServer.start();
     }
 
 }

@@ -11,5 +11,5 @@ public interface PostService {
 
     Post create(PostDTO postDTO);
 
-    Page<Post> getAllPosts(QueryListDTO queryListDTO, Integer pageNum, Integer size);
+    Page<Post> getAllPosts(QueryListDTO queryListDTO, Page page);
 }
